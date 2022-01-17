@@ -3,6 +3,7 @@
 - [Drupal](#drupal)
   - [Get Current Url](#get-current-url)
   - [Attach library to specific page](#attach-library-to-specific-page)
+  - [Attach library to specific form](#attach-library-to-specific-form)
   - [Modals](#modals)
     - [Dynamic Way with content](#dynamic-way-with-content)
     - [Manual with API](#manual-with-api)
@@ -52,7 +53,17 @@ function hello_world_preprocess_page(&$variables){
 }
 ```
 
+## Attach library to specific form
 
+```php
+function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
+{
+
+  if ($form_id == 'FORM_ID') {
+    $form['#attached']['library'][] = 'MODULE_NAME/LIBRARY_NAME';
+  }
+}
+```
 
 ## Modals
 
