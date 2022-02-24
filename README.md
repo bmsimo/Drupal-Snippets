@@ -30,7 +30,6 @@
 ## Get Current Url
 
 ```php
-
 // Method 1
 $url = Url::fromRoute('<current>');
 $url = \Drupal\Core\Url::fromRoute('<current>');
@@ -50,7 +49,6 @@ $current_parameters = \Drupal::routeMatch()->getParameters();
 // Method 5
 use Drupal\Core\Url;
 $url = Url::fromRoute(\Drupal::routeMatch()->getRouteName(), \Drupal::routeMatch()->getRawParameters()->all());
-
 ```
 
 ## Libraries
@@ -77,6 +75,7 @@ function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
   }
 }
 ```
+
 ### Attach library from twig file
 
 ```php
@@ -87,11 +86,9 @@ function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
 
 ### Dynamic Way with content
 
-
 1. Create a Delete Btn, give it the 'use-ajax' class and a callback function
 
 ```php
-
  $form['actions']['delete'] = [
    '#type' => 'button',
    '#value' => t('Borrar'),
@@ -229,13 +226,11 @@ $form['actions']['preview'] = [
 '#url' => Url::fromRoute('entity.node_type.collection')
 // '#attributes' => ['target' => '_blank', 'class' => array('button', 'button--primary', 'js-form-submit', 'form-submit')],
 ];
-
 ```
 
 ## Execute a Stored Procedure
 
 ```php
-
 // Connect to external database.
 Database::setActiveConnection('external');
 
@@ -254,7 +249,6 @@ $convocatoriaID = $_GET['cid'] ?? NULL;
 
  // Redirect or return
  return $this->redirect('convocatorias.convocatorias');
-
 ```
 
 ## Execute a Stored Procedure and get data as a return
@@ -262,7 +256,6 @@ $convocatoriaID = $_GET['cid'] ?? NULL;
 1. The PHP File we're working with
 
 ```php
-
   // OPTIONAL - If there's a query parameter
   $queryParams = (isset($_GET["palabra_clave"]));
 
@@ -280,7 +273,6 @@ $convocatoriaID = $_GET['cid'] ?? NULL;
   return [
     '#sp' => $sp,
   ]
-
 ```
 
 2. we get the data from the return and pass it onto the twig file
@@ -289,30 +281,26 @@ $convocatoriaID = $_GET['cid'] ?? NULL;
 <!-- Since it's an associative array, we need the key and value -->
 
 {% for key,value in sp %}
-	Key :
-	{{ key }}
-	Value :
-	{{ value }}
+    Key :
+    {{ key }}
+    Value :
+    {{ value }}
 {% endfor %}
-
 ```
 
 ## Get query parameters from current URL
 
 ```php
-
 // Using \Drupal::request()->query->get()
 $palabra_clave = \Drupal::request()->query->get('QUERY_PARAMETER');
 
 // Using $_GET[]
 $palabra_clave_value = $_GET["palabra_clave"] ?? "";
-
 ```
 
 ## Grouping query conditions + Using SQL LIKE operator
 
 ```php
-
 // We use orConditionGroup() to groupe multiple Conditions
 // We use escapeLike() to use the LIKE operator
 
@@ -329,13 +317,11 @@ $results = $pager->execute()->fetchAll();
 Database::setActiveConnection();
 ```
 
-
 ## Query Pagination
 
 ### Using PagerSelectExtender
 
 ```php
-
 // We use PagerSelectExtender to limit the what we get on our page
 // $pager should be passed later to the twig file as a variable
 
@@ -480,7 +466,6 @@ $rest = preg_replace($pattern, $replacement, $current_url);
    <?php endif; // !page
    endif; // current page < total pages
    ?>
-
 ```
 
 ## Forms
@@ -526,7 +511,7 @@ class FormularioEdit extends FormBase
   {
     Database::setActiveConnection('external');
 
-    
+
 // Text
 $form['TITULO'] = array(
   '#type' => 'textarea',
@@ -611,7 +596,7 @@ $form['actions']['delete'] = [
 
 return $form;
   }
-  
+
   // Create the required submitForm() function
 public function submitForm(array &$form, FormStateInterface $form_state)
 {
@@ -679,6 +664,7 @@ public function validateForm(array &$form, FormStateInterface $form_state)
 }
 }
 ```
+
 ### Button with other function
 
 ```php
@@ -692,7 +678,6 @@ public function validateForm(array &$form, FormStateInterface $form_state)
 ### Other Form CheatSheets
 
 ```php
-
 // Form attributes and input attributes
 
 // Form Classs
@@ -715,7 +700,6 @@ $estado_name = $form['ESTADO']['#options'][$estado]; //This
  } else {
   $estado = NULL;
  }
-
 ```
 
 ## Create a file
@@ -858,12 +842,9 @@ public function descargarConvocatorias(array &$form, FormStateInterface $form_st
 }
 ```
 
-
 ## Pass Parameters to another Route
 
 ```php
-
-
 // On form submit, do this
 
  $url = Url::fromRoute('ROUTE')->setRouteParameters([
@@ -874,15 +855,15 @@ public function descargarConvocatorias(array &$form, FormStateInterface $form_st
 ]);
 
 $form_state->setRedirectUrl($url);
-
 ```
 
 ## Messages
 
 1. Create a link as a message
-```php
-\Drupal::messenger()->addStatus(['#markup' => '<a href=' . $enlace_convocatoria_nueva . ' target="_blank" rel= noopener noreferrer" >Abrir Convocatoria</a>']);
-``` 
+   
+   ```php
+   \Drupal::messenger()->addStatus(['#markup' => '<a href=' . $enlace_convocatoria_nueva . ' target="_blank" rel= noopener noreferrer" >Abrir Convocatoria</a>']);
+   ```
 
 ## Create Permalink
 
@@ -907,7 +888,6 @@ function createSlug($str, $delimiter = '-')
 ## Check if string Starts With
 
 ```php
-
 // Function to check string starting
 // with given substring
 function startsWith($string, $startString)
@@ -1024,4 +1004,86 @@ function datos_convocatoria_page_attachments_alter(array &$page)
     $page['#attached']['html_head'][] = [$tw_image, 'twitter:image'];
   }
 }
+```
+
+## Crear Links Next/Previous post/pagina
+
+`template_preprocess_page()`
+
+```php
+/*
+  Pagina Detalle de blog
+  */
+  $node = \Drupal::routeMatch()->getParameter('node');
+  $tipo_contenido = $node->bundle(); // Tipo de contenido
+  $nid = $node->id(); // Id del nodo
+
+  if ($tipo_contenido == 'blog') {
+
+    // Next
+    $query_next = \Drupal::entityTypeManager()->getStorage('node');
+    $query_result = $query_next->getQuery();
+
+    $next = $query_result->condition('nid', $nid, '>')
+      ->condition('type', 'blog')
+      ->condition('status', 1)
+      ->sort('nid', 'ASC')
+      ->range(0, 1)
+      ->execute();
+
+    if (!empty($next) && is_array($next)) {
+      $next = array_values($next);
+      $next = $next[0];
+
+      $titulo_siguiente =  Node::load($next)->getTitle(); // Titulo
+      $enlace_siguiente = \Drupal::service('path_alias.manager')
+        ->getAliasByPath('/node/' . $next);  // enlace relativo
+
+      $variables['titulo_siguiente'] = $titulo_siguiente;
+      $variables['enlace_siguiente'] = $enlace_siguiente;
+    }
+
+    $query_prev = \Drupal::entityTypeManager()->getStorage('node');
+    $query_result = $query_prev->getQuery();
+    $prev = $query_result->condition('nid', $nid, '<')
+      ->condition('type', 'blog')
+      ->condition('status', 1)
+      ->sort('nid', 'DESC')
+      ->range(0, 1)
+      ->execute();
+
+    if (!empty($prev) && is_array($prev)) {
+      $prev = array_values($prev);
+      $prev = $prev[0];
+
+      $titulo_previo =  Node::load($prev)->getTitle(); // Titulo
+      $enlace_previo = \Drupal::service('path_alias.manager')
+        ->getAliasByPath('/node/' . $prev);  // enlace relativo
+
+      $variables['titulo_previo'] = $titulo_previo;
+      $variables['enlace_previo'] = $enlace_previo;
+    }
+  }
+```
+
+`page--blog.html.twig`
+
+```twig
+{% if titulo_previo %}
+	<div class="c-paginationdetail__content">
+		<a href="{{enlace_previo}}">
+			<p>ANTERIOR</p>
+			<span>{{titulo_previo}}</span>
+		</a>
+	</div>
+{% endif %}
+{% if titulo_siguiente %}
+	<div class="c-paginationdetail__content c-paginationdetail__content--right">
+		<a href="{{enlace_siguiente}}">
+			<p>POSTERIOR</p>
+			<span>{{titulo_siguiente}}</span>
+		</a>
+	</div>
+{% endif %}
+
 ```
