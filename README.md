@@ -57,11 +57,11 @@
 
 ## Learn Drupal
 
-[How to start with Drupal](https://stackoverflow.com/questions/9713806/where-to-learn-drupal-from-scratch/34879758#34879758)
-[Drupalize](https://drupalize.me/)
-[DrupalBook](https://drupalbook.org/about-drupalbook)
-[Heshans Blog](https://www.heididev.com/)
-[Drupal tips](https://codimth.com/)
+- [How to start with Drupal](https://stackoverflow.com/questions/9713806/where-to-learn-drupal-from-scratch/34879758#34879758)
+- [Drupalize](https://drupalize.me/)
+- [DrupalBook](https://drupalbook.org/about-drupalbook)
+- [Heshans Blog](https://www.heididev.com/)
+- [Drupal tips](https://codimth.com/)
 
 ## Nodes
 
