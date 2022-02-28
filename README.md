@@ -1,6 +1,7 @@
 # Drupal
 
 - [Drupal](#drupal)
+  - [Learn Drupal](#learn-drupal)
   - [Nodes](#nodes)
     - [Node information](#node-information)
     - [Get info of a specific Node](#get-info-of-a-specific-node)
@@ -52,6 +53,15 @@
   - [Other useful functions](#other-useful-functions)
     - [Create Permalink without accents](#create-permalink-without-accents)
     - [Check if string Starts With](#check-if-string-starts-with)
+
+
+## Learn Drupal
+
+[How to start with Drupal](https://stackoverflow.com/questions/9713806/where-to-learn-drupal-from-scratch/34879758#34879758)
+[Drupalize](https://drupalize.me/)
+[DrupalBook](https://drupalbook.org/about-drupalbook)
+[Heshans Blog](https://www.heididev.com/)
+[Drupal tips](https://codimth.com/)
 
 ## Nodes
 
@@ -1048,4 +1058,3 @@ if (!startsWith($palabra_clave_sp, "'") && strlen(trim($palabra_clave_sp)) !== 0
     $count = Database::getConnection()->query("EXECUTE SP", $options);
 }
 ```
-
