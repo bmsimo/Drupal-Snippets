@@ -22,7 +22,6 @@
     - [Get current path](#get-current-path)
     - [Get current path alias](#get-current-path-alias)
     - [Check current path](#check-current-path)
-    - [Get current path alias](#get-current-path-alias-1)
     - [Get current domain](#get-current-domain)
     - [Pass Parameters to another Route](#pass-parameters-to-another-route)
     - [Get query parameters from current URL](#get-query-parameters-from-current-url)
@@ -218,10 +217,6 @@ $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_pa
  \Drupal::service('path.matcher')->isFrontPage();
 ```
 
-### Get current path alias
-
-```php
-```
 
 
 ### Get current domain
