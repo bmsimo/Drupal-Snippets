@@ -45,7 +45,9 @@
     - [Disable advanced search and help links from search form](#disable-advanced-search-and-help-links-from-search-form)
     - [Add classes to form](#add-classes-to-form)
     - [Get the element name instead of value](#get-the-element-name-instead-of-value)
-  - [Create a file](#create-a-file)
+  - [Files & Images](#files--images)
+    - [Create a file](#create-a-file)
+    - [Create the url of an image](#create-the-url-of-an-image)
   - [Messages](#messages)
   - [Add Metatags](#add-metatags)
   - [Create Next/Previous Post links](#create-nextprevious-post-links)
@@ -781,7 +783,9 @@ $estado_name = $form['ESTADO']['#options'][$value]; //This
  }
 ```
 
-## Create a file
+## Files & Images
+
+### Create a file
 
 ```php
 public function descargarConvocatorias(array &$form, FormStateInterface $form_state)
@@ -839,6 +843,20 @@ public function descargarConvocatorias(array &$form, FormStateInterface $form_st
 
      // Redirect to url
     $form_state->setRedirectUrl($url1);
+}
+```
+
+### Create the url of an image
+
+```php
+use Drupal\file\Entity\File;
+
+$mid = $node->field_image->target_id;
+if (!empty($mid)) {
+   // Crear enlace de la imagen
+   $file = File::load($mid);
+   $url = $file->getFileUri();
+   $m_url = file_create_url($url);
 }
 ```
 
