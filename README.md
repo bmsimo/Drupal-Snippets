@@ -54,6 +54,8 @@
   - [Other useful functions](#other-useful-functions)
     - [Create Permalink without accents](#create-permalink-without-accents)
     - [Check if string Starts With](#check-if-string-starts-with)
+  - [Migration](#migration)
+  - [Minimum installation profile](#minimum-installation-profile)
 
 
 ## Learn Drupal
@@ -1071,3 +1073,14 @@ if (!startsWith($palabra_clave_sp, "'") && strlen(trim($palabra_clave_sp)) !== 0
     $count = Database::getConnection()->query("EXECUTE SP", $options);
 }
 ```
+
+## Migration
+
+## Minimum installation profile
+
+```bash
+drush --yes site-install minimal --site-name='' --site-mail='' --acount-name='' --account-mail='' --account-pass=''
+```
+
+- The same modules should be enabled both for d7 and d9 in order for the migrate plugin to do the job
+- *Views* Cannot be recreated. It has to be done manually.
