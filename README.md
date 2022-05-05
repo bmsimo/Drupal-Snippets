@@ -51,6 +51,7 @@
   - [Messages](#messages)
   - [Add Metatags](#add-metatags)
   - [Create Next/Previous Post links](#create-nextprevious-post-links)
+    - [Get data from specific node](#get-data-from-specific-node)
   - [Other useful functions](#other-useful-functions)
     - [Create Permalink without accents](#create-permalink-without-accents)
     - [Check if string Starts With](#check-if-string-starts-with)
@@ -1032,6 +1033,42 @@ if ($node instanceof \Drupal\node\NodeInterface) {
 		</a>
 	</div>
 {% endif %}
+```
+
+### Get data from specific node
+
+```php
+$node = \Drupal::routeMatch()->getParameter('node');
+if ($node instanceof \Drupal\node\NodeInterface) {
+   $tipo_contenido = $node->getType(); // Tipo de contenido
+   $nid = $node->id(); // Id del nodo
+   if ($tipo_contenido == 'blog') {
+
+
+      $query = \Drupal::entityTypeManager()->getStorage('node');
+      $query_result = $query->getQuery();
+
+      $nodo = $query_result->condition('nid', $nid, '=')
+        ->condition('type', 'blog')
+        ->condition('status', 1)
+        ->sort('nid', 'ASC')
+        ->range(0, 1)
+        ->execute();
+
+      if (!empty($nodo) && is_array($nodo)) {
+        $nodo = array_values($nodo);
+        $nodo = $nodo[0];
+
+        $titulo =  Node::load($nodo)->getTitle(); // Titulo
+        $enlace = \Drupal::service('path_alias.manager')
+          ->getAliasByPath('/node/' . $nodo);  // enlace relativo
+
+        $variables['titulo'] = $titulo;
+        $variables['enlace'] = $enlace;
+      }
+
+   }
+}
 ```
 
 ## Other useful functions
