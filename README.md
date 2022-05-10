@@ -16,6 +16,7 @@
     - [Check if variable is not null](#check-if-variable-is-not-null)
     - [Render Node elements and fields](#render-node-elements-and-fields)
     - [Render multiple field elements](#render-multiple-field-elements)
+    - [Render multuple taxonomy terms field](#render-multuple-taxonomy-terms-field)
     - [Links](#links-1)
   - [Urls](#urls)
     - [Get current url](#get-current-url)
@@ -169,6 +170,23 @@ $variables['base_path'] = base_path();
   {% if not loop.last %},{% endif %}
 {% endfor %}
 ```
+
+### Render multuple taxonomy terms field
+
+```php
+// Native
+{% if content.field_type_of_action %}
+  {% for item in content.field_type_of_action['#items'] %}
+    {{item.entity.tid.value}}
+    {{item.entity.name.value}}
+  {% endfor %}
+{% endif %}
+
+// Using Twig Tweak
+{% set tid = node.field_type_of_action.target_id %}
+{% if tid %} {{ drupal_field('name', 'taxonomy_term', tid) }} {% endif %}
+```
+
 
 ### Links
 
