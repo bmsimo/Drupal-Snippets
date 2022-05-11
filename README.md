@@ -16,7 +16,9 @@
     - [Check if variable is not null](#check-if-variable-is-not-null)
     - [Render Node elements and fields](#render-node-elements-and-fields)
     - [Render multiple field elements](#render-multiple-field-elements)
-    - [Render multuple taxonomy terms field](#render-multuple-taxonomy-terms-field)
+    - [Render multiple taxonomy terms field](#render-multiple-taxonomy-terms-field)
+    - [Render/Access List (Text) Field type](#renderaccess-list-text-field-type)
+    - [Render Translated content types/Taxonomies](#render-translated-content-typestaxonomies)
     - [Links](#links-1)
   - [Urls](#urls)
     - [Get current url](#get-current-url)
@@ -171,7 +173,7 @@ $variables['base_path'] = base_path();
 {% endfor %}
 ```
 
-### Render multuple taxonomy terms field
+### Render multiple taxonomy terms field
 
 ```php
 // Native
@@ -185,6 +187,26 @@ $variables['base_path'] = base_path();
 // Using Twig Tweak
 {% set tid = node.field_type_of_action.target_id %}
 {% if tid %} {{ drupal_field('name', 'taxonomy_term', tid) }} {% endif %}
+```
+### Render/Access List (Text) Field type
+
+```php
+{{node.field_name[0].value}}
+```
+
+### Render Translated content types/Taxonomies
+
+```php
+// Theme file
+THEME_NAME_PREPROCESS_NODE(&variables){
+$language = \Drupal::languageManager()->getCurrentLanguage()->getId();
+variables['language'] = $language;
+}
+// Twig File
+{% for item in content.FIELD_NAME['#items'] %}
+  {{item.entity.TRANSLATION(LANGUAGE).name.value}}
+{% endfor %}
+
 ```
 
 
