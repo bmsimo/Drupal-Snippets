@@ -3,9 +3,14 @@
 - [Drupal](#drupal)
   - [Learn Drupal](#learn-drupal)
   - [Nodes](#nodes)
-    - [Node information](#node-information)
-    - [Get info of a specific Node](#get-info-of-a-specific-node)
+    - [Current Node information](#current-node-information)
+    - [Get info of a specific Node - NODE::load()](#get-info-of-a-specific-node---nodeload)
+    - [Get info of a specific Nodes - EntityQuery](#get-info-of-a-specific-nodes---entityquery)
     - [Links](#links)
+    - [Get Taxonomy Term Names](#get-taxonomy-term-names)
+      - [Method 1 - entityTypeManager - Gets Taxonomy Terms](#method-1---entitytypemanager---gets-taxonomy-terms)
+      - [Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field](#method-2---entityquery--load---get-taxonomy-terms-sorted-by-custom-field)
+      - [Method 3 - Same as method 3 but using entityTypeManager](#method-3---same-as-method-3-but-using-entitytypemanager)
   - [Templates](#templates)
     - [Use specific Template](#use-specific-template)
     - [Add current path as css class](#add-current-path-as-css-class)
@@ -72,26 +77,95 @@
 
 ## Nodes
 
-### Node information
+### Current Node information
 
 ```php
+// Using a preprocessing function we can access information on the current node
 $node = \Drupal::routeMatch()->getParameter('node'); // get node
 if ($node instanceof \Drupal\node\NodeInterface){} // Check if it's node
-$tipo_contenido = $node->getType(); // Node type
+$CONTENT_TYPE = $node->getType(); // Node type
 $nid = $node->id(); // Node id | nid
 $title = $node->getTitle();; // Node title
 $node->bundle(); // Node Type same as getType()
 ```
 
-### Get info of a specific Node
+### Get info of a specific Node - NODE::load()
 
 ```php
- $NODE_TITLE =  Node::load(ID)->getTitle(); // Node title
+$NODE_TITLE =  Node::load(ID)->getTitle(); // Node title
 ```
+
+### Get info of a specific Nodes - EntityQuery
+
+```php
+$node_ids = Drupal::entityQuery('node')
+      ->condition('type', CONTENT_TYPE)
+      ->condition('FIELD_NAME', FIELD_ID)
+      ->execute(); // Get all the node ids that match these conditions
+$nodes = Node::loadMultiple($ambito_ids); // All the nodes in an assoc array
+```
+
+
 
 ### Links
 
 [Node Methods](https://api.drupal.org/api/drupal/core%21modules%21node%21src%21Entity%21Node.php/class/Node/9.1.x)
+
+### Get Taxonomy Term Names
+
+#### Method 1 - entityTypeManager - Gets Taxonomy Terms
+
+```php
+$tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(
+  'grafica_ambito', // The taxonomy term vocabulary machine name.
+  0,                 // The "tid" of parent using "0" to get all.
+  1,                 // Get only 1st level.
+  TRUE               // Get full load of taxonomy term entity.
+);
+$results = [];
+
+foreach ($tree as $term) {
+  $results[] = $term->getName();
+}
+```
+
+#### Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
+
+```php
+$tax_ambito = \Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', "grafica_ambito")
+    ->sort('field_orden');
+
+$result_ambito = $tax_ambito->execute();
+
+$tax_ambito_array = []; // Ambitos
+
+foreach ($result_ambito as $ambito) {
+  $term = \Drupal\taxonomy\Entity\Term::load($ambito);
+  $tax_ambito_array[] = $term->name->value;
+}
+```
+
+#### Method 3 - Same as method 3 but using entityTypeManager
+
+```php
+
+$tax_ambito = \Drupal::entityQuery('taxonomy_term')
+    ->condition('vid', "grafica_ambito")
+    ->sort('field_orden');
+
+$result_ambito = $tax_ambito->execute();
+
+$tax_ambito_array = []; // Ambitos
+
+foreach ($result_ambito as $ambito) {
+  $term = \Drupal::entityTypeManager()
+    ->getStorage('taxonomy_term')
+    ->load($ambito);
+  $tax_ambito_array[] = $term->getName();
+}
+```
+
 
 ## Templates
 
