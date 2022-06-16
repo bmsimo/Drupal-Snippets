@@ -2,6 +2,7 @@
 
 - [Drupal](#drupal)
   - [Learn Drupal](#learn-drupal)
+  - [Modules used](#modules-used)
   - [Nodes](#nodes)
     - [Current Node information](#current-node-information)
     - [Get info of a specific Node - NODE::load()](#get-info-of-a-specific-node---nodeload)
@@ -75,6 +76,32 @@
 - [Heshans Blog](https://www.heididev.com/)
 - [Drupal tips](https://codimth.com/)
 
+## Modules used ##
+
+- Devel
+- Devel Kint
+- Bootstrap Library [optional]
+- Admin Toolbar => Tested Weekly
+- AT Theme generator
+- AT Tool
+- Back to top [optional]
+- jQuery UI [optional]
+- jQuery UI Accordion [optional]
+- Language Switcher Langcode Block [optional]
+- Easy Breadcrumb => Tested Weekly
+- Backup and migrate => Tested Weekly
+- Bulk update fields [optional]
+- Rabbit Hole => Tested Weekly Passes with D9.3 + PHP 8
+- Views Accordion
+- Twig Tweak => Tested Weekly
+- Metatag => Tested Weekly
+- Simple XML Sitemap
+- Cookies [optional]
+- SMTP Authentication Support
+- Captcha [optional]
+- Image captcha [optional]
+- Better Exposed Filters
+
 ## Nodes
 
 ### Current Node information
@@ -102,7 +129,7 @@ $node_ids = Drupal::entityQuery('node')
       ->condition('type', CONTENT_TYPE)
       ->condition('FIELD_NAME', FIELD_ID)
       ->execute(); // Get all the node ids that match these conditions
-$nodes = Node::loadMultiple($ambito_ids); // All the nodes in an assoc array
+$nodes = Node::loadMultiple($node_ids); // All the nodes in an assoc array
 ```
 
 
