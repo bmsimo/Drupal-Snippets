@@ -308,6 +308,10 @@ variables['language'] = $language;
   {{item.entity.TRANSLATION(LANGUAGE).name.value}}
 {% endfor %}
 
+// This Works for field values
+
+{{nodo.translation(idioma).body.value}}
+
 ```
 
 
