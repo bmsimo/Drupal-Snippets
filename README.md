@@ -314,6 +314,15 @@ variables['language'] = $language;
 
 ```
 
+## Display select field label instead of value
+
+```php
+{% for key, item in NODE.CONTENT_TYPE.entity.FIELD_NAME if key|first != '#' %}
+    {% set valor = item.value %}
+    {{ NODE.CONTENT_TYPE.entity.FIELD_NAME.getSetting('allowed_values')[valor] }}
+{% endfor %}
+```
+
 
 ### Links
 
