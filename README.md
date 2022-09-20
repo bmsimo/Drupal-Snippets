@@ -25,6 +25,8 @@
     - [Render multiple taxonomy terms field](#render-multiple-taxonomy-terms-field)
     - [Render/Access List (Text) Field type](#renderaccess-list-text-field-type)
     - [Render Translated content types/Taxonomies](#render-translated-content-typestaxonomies)
+    - [Render Referenced Media Elements from a referenced Item](#render-referenced-media-elements-from-a-referenced-item)
+  - [Display select field label instead of value](#display-select-field-label-instead-of-value)
     - [Links](#links-1)
   - [Urls](#urls)
     - [Get current url](#get-current-url)
@@ -312,6 +314,17 @@ variables['language'] = $language;
 
 {{nodo.translation(idioma).body.value}}
 
+```
+
+### Render Referenced Media Elements from a referenced Item
+
+```php
+{% set url_imagen = node.field_actividades_relacionadas.entity.field_imagen|file_uri %}
+{% set alt_imagen = node.field_actividades_relacionadas.entity.field_imagen.entity.field_media_image.alt %}
+{{ file_url(url_imagen)}}
+{{ alt_imagen }}
+// Twig Tweak
+{{ drupal_entity('media', node.field_actividades_relacionadas.entity.field_imagen.entity.id) }}
 ```
 
 ## Display select field label instead of value
