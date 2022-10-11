@@ -13,25 +13,40 @@
 
 ## Modules ##
 
-### Developmemt ###
+### Administration
+
+- Admin Toolbar
+
+### Access
+
+- Rabbit Hole
+
+### Development ###
 
 - Devel
-- Admin Toolbar
-- Rabbit Hole => Tested Weekly Passes with D9.3 + PHP 8
-- Twig Tweak => Tested Weekly
-- Metatag => Tested Weekly
+- Twig Tweak
 - Vardumper
 - Twig Vardumper
 - Simple Cron
 
 ### Productivity ###
 
-- Easy Breadcrumb => Tested Weekly
+
 - Bulk update fields _(optional)_
 - Coffee
-- Better Exposed Filters
-- Simple XML Sitemap
 - Entity Type Clone
+- Quick Node Clone
+
+### SEO
+
+- Simple XML Sitemap
+- Easy Breadcrumb
+- Metatag
+
+
+### Views
+
+- Better Exposed Filters
 
 ### Themes ###
 
@@ -48,6 +63,96 @@
 
 - Config Filter
 - Config ignore
+
+## Core Classes & Methods
+
+### Url
+
+#### Get current url
+
+```php
+
+// Method 1
+$url = Url::fromRoute('<current>');
+$url = \Drupal\Core\Url::fromRoute('<current>');
+$path = $url->getInternalPath();
+
+// Method 2
+Url::fromRoute('<current>',array(),array('absolute'=>'true'))->toString();
+
+// Method 3
+use Drupal\Core\Url;
+Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all(), 'absolute' => 'true'])->toString();
+
+// Method 4
+$current_route = \Drupal::routeMatch()->getRouteName();
+$current_parameters = \Drupal::routeMatch()->getParameters();
+
+// Method 5
+use Drupal\Core\Url;
+$url = Url::fromRoute(\Drupal::routeMatch()->getRouteName(), \Drupal::routeMatch()->getRawParameters()->all());
+```
+
+
+
+#### Pass Parameters to another Route
+
+```php
+
+// On form submit, do this
+ $url = Url::fromRoute('ROUTE')->setRouteParameters([
+    'name' => $name,
+]);
+
+// redirect form to this url with these parameters
+$form_state->setRedirectUrl($url);
+```
+
+### Drupal
+
+#### Get current path
+
+```php
+$current_path = \Drupal::service('path.current')->getPath();
+```
+
+#### Get current path alias
+
+```php
+$path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+```
+
+#### Check current path
+
+```php
+ \Drupal::service('path.matcher')->isFrontPage();
+```
+
+### Request
+
+#### Get current domain
+
+```php
+\Drupal::request()->getSchemeAndHttpHost()
+```
+
+#### Get BaseUrl
+
+```php
+\Drupal::request()->baseUrl()
+```
+
+
+#### Get query parameters from current URL
+
+```php
+
+// Recommended
+$keyword = \Drupal::request()->query->get('QUERY_PARAMETER');
+
+// Using $_GET[]
+$keyword = $_GET["QUERY_PARAMETER"] ?? "";
+```
 
 ## Best Practices
 
@@ -330,86 +435,6 @@ variables['language'] = $language;
 - [Rendereable Elements Attributes](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21Element%21RenderElement.php/class/RenderElement/9.1.x)
 - [Render API](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/group/theme_render/9.1.x)
 
-## Urls
-
-### Get current url
-
-```php
-
-// Method 1
-$url = Url::fromRoute('<current>');
-$url = \Drupal\Core\Url::fromRoute('<current>');
-$path = $url->getInternalPath();
-
-// Method 2
-Url::fromRoute('<current>',array(),array('absolute'=>'true'))->toString();
-
-// Method 3
-use Drupal\Core\Url;
-Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all(), 'absolute' => 'true'])->toString();
-
-// Method 4
-$current_route = \Drupal::routeMatch()->getRouteName();
-$current_parameters = \Drupal::routeMatch()->getParameters();
-
-// Method 5
-use Drupal\Core\Url;
-$url = Url::fromRoute(\Drupal::routeMatch()->getRouteName(), \Drupal::routeMatch()->getRawParameters()->all());
-```
-
-### Get current path
-
-```php
-$current_path = \Drupal::service('path.current')->getPath();
-```
-
-### Get current path alias
-
-```php
-$path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
-```
-
-### Check current path
-
-```php
- \Drupal::service('path.matcher')->isFrontPage();
-```
-
-### Get current domain
-
-```php
-\Drupal::request()->getSchemeAndHttpHost()
-```
-
-### Get BaseUrl
-
-```php
-\Drupal::request()->baseUrl()
-```
-
-### Pass Parameters to another Route
-
-```php
-
-// On form submit, do this
- $url = Url::fromRoute('ROUTE')->setRouteParameters([
-    'name' => $name,
-]);
-
-// redirect form to this url with these parameters
-$form_state->setRedirectUrl($url);
-```
-
-### Get query parameters from current URL
-
-```php
-
-// Recommended
-$keyword = \Drupal::request()->query->get('QUERY_PARAMETER');
-
-// Using $_GET[]
-$keyword = $_GET["QUERY_PARAMETER"] ?? "";
-```
 
 ## Libraries
 
