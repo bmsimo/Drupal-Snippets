@@ -1,87 +1,87 @@
-# 1. Drupal Documentation
+# Drupal Documentation
 
-- [1. Drupal Documentation](#1-drupal-documentation)
-  - [1.1. Learn Drupal](#11-learn-drupal)
-  - [1.2. Modules](#12-modules)
-    - [1.2.1. Developmemt](#121-developmemt)
-    - [1.2.2. Productivity](#122-productivity)
-    - [1.2.3. Themes](#123-themes)
-    - [1.2.4. Search](#124-search)
-  - [1.3. Configuration](#13-configuration)
+- [Drupal Documentation](#drupal-documentation)
+  - [Learn Drupal](#learn-drupal)
+  - [Modules](#modules)
+    - [Developmemt](#developmemt)
+    - [Productivity](#productivity)
+    - [Themes](#themes)
+    - [Search](#search)
+  - [Configuration](#configuration)
   - [Best Practices](#best-practices)
-  - [1.4. Nodes](#14-nodes)
-    - [1.4.1. Get Current Node information](#141-get-current-node-information)
-    - [1.4.2. Get current Node information on preview page](#142-get-current-node-information-on-preview-page)
-    - [1.4.4. Get info of a specific Nodes - EntityQuery](#144-get-info-of-a-specific-nodes---entityquery)
-    - [1.4.5. Get info of a specific Nodes - EntityTypeManager](#145-get-info-of-a-specific-nodes---entitytypemanager)
-    - [1.4.6. Links](#146-links)
-    - [1.4.7. Get Taxonomy Term Names](#147-get-taxonomy-term-names)
-      - [1.4.7.1. Method 1 - entityTypeManager - Gets Taxonomy Terms](#1471-method-1---entitytypemanager---gets-taxonomy-terms)
-      - [1.4.7.2. Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field](#1472-method-2---entityquery--load---get-taxonomy-terms-sorted-by-custom-field)
-      - [1.4.7.3. Method 3 - Same as method 3 but using entityTypeManager](#1473-method-3---same-as-method-3-but-using-entitytypemanager)
-  - [1.5. Templates](#15-templates)
-    - [1.5.1. Use specific Template](#151-use-specific-template)
-    - [1.5.2. Add current path as css class](#152-add-current-path-as-css-class)
-    - [1.5.3. Get all parameters](#153-get-all-parameters)
-    - [1.5.4. Get current language](#154-get-current-language)
-    - [1.5.5. Get base path](#155-get-base-path)
-  - [1.6. Twig](#16-twig)
-    - [1.6.1. Check if variable is not null](#161-check-if-variable-is-not-null)
-    - [1.6.2. Render Node elements and fields](#162-render-node-elements-and-fields)
-    - [1.6.3. Render Referenced Media Elements from a referenced Item](#163-render-referenced-media-elements-from-a-referenced-item)
-    - [1.6.4. Render multiple field elements](#164-render-multiple-field-elements)
-    - [1.6.5. Render multiple taxonomy terms field](#165-render-multiple-taxonomy-terms-field)
-    - [1.6.6. Render/Access List (Text) Field type](#166-renderaccess-list-text-field-type)
-    - [1.6.7. Render Translated content types/Taxonomies](#167-render-translated-content-typestaxonomies)
-    - [1.6.8. Render the label of a select field type](#168-render-the-label-of-a-select-field-type)
-    - [1.6.9. Links](#169-links)
-  - [1.7. Urls](#17-urls)
-    - [1.7.1. Get current url](#171-get-current-url)
-    - [1.7.2. Get current path](#172-get-current-path)
-    - [1.7.3. Get current path alias](#173-get-current-path-alias)
-    - [1.7.4. Check current path](#174-check-current-path)
-    - [1.7.5. Get current domain](#175-get-current-domain)
-    - [1.7.6. Get BaseUrl](#176-get-baseurl)
-    - [1.7.7. Pass Parameters to another Route](#177-pass-parameters-to-another-route)
-    - [1.7.8. Get query parameters from current URL](#178-get-query-parameters-from-current-url)
-  - [1.8. Libraries](#18-libraries)
-    - [1.8.1. Attach library to specific page](#181-attach-library-to-specific-page)
-    - [1.8.2. Attach library to specific form](#182-attach-library-to-specific-form)
-    - [1.8.3. Attach library from twig file](#183-attach-library-from-twig-file)
-  - [1.9. Stored Procedures](#19-stored-procedures)
-    - [1.9.1. Execute a Stored Procedure](#191-execute-a-stored-procedure)
-    - [1.9.2. Execute a Stored Procedure and get data as a return](#192-execute-a-stored-procedure-and-get-data-as-a-return)
-  - [1.10. SQL](#110-sql)
-    - [1.10.1. Grouping query conditions + Using SQL LIKE operator](#1101-grouping-query-conditions--using-sql-like-operator)
-    - [1.10.2. Query Pagination](#1102-query-pagination)
-      - [1.10.2.1. Using PagerSelectExtender](#11021-using-pagerselectextender)
-      - [1.10.2.2. Using Stored Procedure + PHP](#11022-using-stored-procedure--php)
-  - [1.11. Forms](#111-forms)
-    - [1.11.1. Create a form with Ajax Callback - namespace + buildForm()](#1111-create-a-form-with-ajax-callback---namespace--buildform)
-    - [1.11.2. Create a form with Ajax Callback - submitForm()](#1112-create-a-form-with-ajax-callback---submitform)
-    - [1.11.3. Create a form with Ajax Callback - validateForm()](#1113-create-a-form-with-ajax-callback---validateform)
-    - [1.11.4. Button with other function](#1114-button-with-other-function)
-    - [1.11.5. Form elements](#1115-form-elements)
-    - [1.11.6. Add classes to form](#1116-add-classes-to-form)
-    - [1.11.7. Add class to form element Label](#1117-add-class-to-form-element-label)
-    - [1.11.8. Disable advanced search and help links from search form](#1118-disable-advanced-search-and-help-links-from-search-form)
-    - [1.11.9. Get the element name instead of value](#1119-get-the-element-name-instead-of-value)
-  - [1.12. Files & Images](#112-files--images)
-    - [1.12.1. Create CSV](#1121-create-csv)
-    - [1.12.2. Create the url of an image](#1122-create-the-url-of-an-image)
-  - [1.13. Messages](#113-messages)
-  - [1.14. Add Metatags](#114-add-metatags)
-  - [1.15. Create Next/Previous Post links](#115-create-nextprevious-post-links)
-  - [1.16. Other useful functions](#116-other-useful-functions)
-    - [1.16.1. Create Permalink without accents](#1161-create-permalink-without-accents)
-    - [1.16.2. Check if string Starts With](#1162-check-if-string-starts-with)
-    - [1.16.3. Group Array by Date](#1163-group-array-by-date)
-    - [1.16.4. Flatten Array](#1164-flatten-array)
-  - [1.17. Drush](#117-drush)
-    - [1.17.1. Instalation](#1171-instalation)
-    - [1.17.2. Drush Commands i use most](#1172-drush-commands-i-use-most)
+  - [Nodes](#nodes)
+    - [Get Current Node information](#get-current-node-information)
+    - [Get current Node information on preview page](#get-current-node-information-on-preview-page)
+    - [Get info of a specific Nodes - EntityQuery](#get-info-of-a-specific-nodes---entityquery)
+    - [Get info of a specific Nodes - EntityTypeManager](#get-info-of-a-specific-nodes---entitytypemanager)
+    - [Links](#links)
+    - [Get Taxonomy Term Names](#get-taxonomy-term-names)
+      - [Method 1 - entityTypeManager - Gets Taxonomy Terms](#method-1---entitytypemanager---gets-taxonomy-terms)
+      - [Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field](#method-2---entityquery--load---get-taxonomy-terms-sorted-by-custom-field)
+      - [Method 3 - Same as method 3 but using entityTypeManager](#method-3---same-as-method-3-but-using-entitytypemanager)
+  - [Templates](#templates)
+    - [Use specific Template](#use-specific-template)
+    - [Add current path as css class](#add-current-path-as-css-class)
+    - [Get all parameters](#get-all-parameters)
+    - [Get current language](#get-current-language)
+    - [Get base path](#get-base-path)
+  - [Twig](#twig)
+    - [Check if variable is not null](#check-if-variable-is-not-null)
+    - [Render Node elements and fields](#render-node-elements-and-fields)
+    - [Render Referenced Media Elements from a referenced Item](#render-referenced-media-elements-from-a-referenced-item)
+    - [Render multiple field elements](#render-multiple-field-elements)
+    - [Render multiple taxonomy terms field](#render-multiple-taxonomy-terms-field)
+    - [Render/Access List (Text) Field type](#renderaccess-list-text-field-type)
+    - [Render Translated content types/Taxonomies](#render-translated-content-typestaxonomies)
+    - [Render the label of a select field type](#render-the-label-of-a-select-field-type)
+    - [Links](#links-1)
+  - [Urls](#urls)
+    - [Get current url](#get-current-url)
+    - [Get current path](#get-current-path)
+    - [Get current path alias](#get-current-path-alias)
+    - [Check current path](#check-current-path)
+    - [Get current domain](#get-current-domain)
+    - [Get BaseUrl](#get-baseurl)
+    - [Pass Parameters to another Route](#pass-parameters-to-another-route)
+    - [Get query parameters from current URL](#get-query-parameters-from-current-url)
+  - [Libraries](#libraries)
+    - [Attach library to specific page](#attach-library-to-specific-page)
+    - [Attach library to specific form](#attach-library-to-specific-form)
+    - [Attach library from twig file](#attach-library-from-twig-file)
+  - [Stored Procedures](#stored-procedures)
+    - [Execute a Stored Procedure](#execute-a-stored-procedure)
+    - [Execute a Stored Procedure and get data as a return](#execute-a-stored-procedure-and-get-data-as-a-return)
+  - [SQL](#sql)
+    - [Grouping query conditions + Using SQL LIKE operator](#grouping-query-conditions--using-sql-like-operator)
+    - [Query Pagination](#query-pagination)
+      - [Using PagerSelectExtender](#using-pagerselectextender)
+      - [Using Stored Procedure + PHP](#using-stored-procedure--php)
+  - [Forms](#forms)
+    - [Create a form with Ajax Callback - namespace + buildForm()](#create-a-form-with-ajax-callback---namespace--buildform)
+    - [Create a form with Ajax Callback - submitForm()](#create-a-form-with-ajax-callback---submitform)
+    - [Create a form with Ajax Callback - validateForm()](#create-a-form-with-ajax-callback---validateform)
+    - [Button with other function](#button-with-other-function)
+    - [Form elements](#form-elements)
+    - [Add classes to form](#add-classes-to-form)
+    - [Add class to form element Label](#add-class-to-form-element-label)
+    - [Disable advanced search and help links from search form](#disable-advanced-search-and-help-links-from-search-form)
+    - [Get the element name instead of value](#get-the-element-name-instead-of-value)
+  - [Files & Images](#files--images)
+    - [Create CSV](#create-csv)
+    - [Create the url of an image](#create-the-url-of-an-image)
+  - [Messages](#messages)
+  - [Add Metatags](#add-metatags)
+  - [Create Next/Previous Post links](#create-nextprevious-post-links)
+  - [Other useful functions](#other-useful-functions)
+    - [Create Permalink without accents](#create-permalink-without-accents)
+    - [Check if string Starts With](#check-if-string-starts-with)
+    - [Group Array by Date](#group-array-by-date)
+    - [Flatten Array](#flatten-array)
+  - [Drush](#drush)
+    - [Instalation](#instalation)
+    - [Drush Commands i use most](#drush-commands-i-use-most)
 
-## 1.1. Learn Drupal
+## Learn Drupal
 
 - [How to start with Drupal](https://stackoverflow.com/questions/9713806/where-to-learn-drupal-from-scratch/34879758#34879758)
 - [Drupalize](https://drupalize.me/)
@@ -89,9 +89,9 @@
 - [Heshans Blog](https://www.heididev.com/)
 - [Drupal tips](https://codimth.com/)
 
-## 1.2. Modules ##
+## Modules ##
 
-### 1.2.1. Developmemt ###
+### Developmemt ###
 
 - Devel
 - Admin Toolbar
@@ -102,7 +102,7 @@
 - Twig Vardumper
 - Simple Cron
 
-### 1.2.2. Productivity ###
+### Productivity ###
 
 - Easy Breadcrumb => Tested Weekly
 - Bulk update fields _(optional)_
@@ -111,18 +111,18 @@
 - Simple XML Sitemap
 - Entity Type Clone
 
-### 1.2.3. Themes ###
+### Themes ###
 
 - AT Theme 2.0 + AT Theme generator + AT Tool
 - Bootstrap Sass
 
-### 1.2.4. Search ###
+### Search ###
 
 - Search Api
 - Search Api Solr
 - Facets
 
-## 1.3. Configuration
+## Configuration
 
 - Config Filter
 - Config ignore
@@ -131,9 +131,9 @@
 
 
 
-## 1.4. Nodes
+## Nodes
 
-### 1.4.1. Get Current Node information
+### Get Current Node information
 
 ```php
 // Using a preprocessing function we can access information on the current node
@@ -145,7 +145,7 @@ $title = $node->getTitle();; // Node title
 $node->bundle(); // Node Type same as getType()
 ```
 
-### 1.4.2. Get current Node information on preview page
+### Get current Node information on preview page
 
 ```php
   $routeMatch   = \Drupal::routeMatch();
@@ -158,7 +158,7 @@ $node->bundle(); // Node Type same as getType()
 $NODE_TITLE =  Node::load(ID)->getTitle(); // Node title
 ```
 
-### 1.4.4. Get info of a specific Nodes - EntityQuery
+### Get info of a specific Nodes - EntityQuery
 
 ```php
 $node_ids = Drupal::entityQuery('node')
@@ -168,7 +168,7 @@ $node_ids = Drupal::entityQuery('node')
 $nodes = Node::loadMultiple($node_ids); // All the nodes in an assoc array
 ```
 
-### 1.4.5. Get info of a specific Nodes - EntityTypeManager
+### Get info of a specific Nodes - EntityTypeManager
 
 ```php
 $query = \Drupal::entityTypeManager()->getStorage('node');
@@ -191,13 +191,13 @@ $enlace = \Drupal::service('path_alias.manager')
 
 ```
 
-### 1.4.6. Links
+### Links
 
 [Node Methods](https://api.drupal.org/api/drupal/core%21modules%21node%21src%21Entity%21Node.php/class/Node/9.1.x)
 
-### 1.4.7. Get Taxonomy Term Names
+### Get Taxonomy Term Names
 
-#### 1.4.7.1. Method 1 - entityTypeManager - Gets Taxonomy Terms
+#### Method 1 - entityTypeManager - Gets Taxonomy Terms
 
 ```php
 $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(
@@ -213,7 +213,7 @@ foreach ($tree as $term) {
 }
 ```
 
-#### 1.4.7.2. Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
+#### Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
 
 ```php
 $taxonomy_terms = \Drupal::entityQuery('taxonomy_term')
@@ -230,7 +230,7 @@ $term_names_array = [];
 }
 ```
 
-#### 1.4.7.3. Method 3 - Same as method 3 but using entityTypeManager
+#### Method 3 - Same as method 3 but using entityTypeManager
 
 ```php
 
@@ -250,9 +250,9 @@ foreach ($results as $result) {
 }
 ```
 
-## 1.5. Templates
+## Templates
 
-### 1.5.1. Use specific Template
+### Use specific Template
 
 ```php
 function THEMENAME_theme_suggestions_page_alter(array &$suggestions, array $variables){
@@ -260,7 +260,7 @@ function THEMENAME_theme_suggestions_page_alter(array &$suggestions, array $vari
 }
 ```
 
-### 1.5.2. Add current path as css class
+### Add current path as css class
 
 ```php
 $current_path = \Drupal::service('path.current')->getPath();
@@ -269,14 +269,14 @@ $path_alias = ltrim($path_alias, '/');
 $variables['attributes']['class'][] = 'path-' . \Drupal\Component\Utility\Html::cleanCssIdentifier($path_alias);
 ```
 
-### 1.5.3. Get all parameters
+### Get all parameters
 
 ```php
 $parameters = \Drupal::routeMatch()->getParameters()->all();
 $parameters['taxonomy_term'];
 ```
 
-### 1.5.4. Get current language
+### Get current language
 
 ```php
 $parameters = \Drupal::routeMatch()->getParameters()->all();
@@ -284,22 +284,22 @@ $variables['language'] = \Drupal::languageManager()->getCurrentLanguage();
 $variables['language'] = \Drupal::languageManager()->getCurrentLanguage()->getId();
 ```
 
-### 1.5.5. Get base path
+### Get base path
 
 ```php
 $variables['base_path'] = base_path();
 ```
 
-## 1.6. Twig
+## Twig
 
-### 1.6.1. Check if variable is not null
+### Check if variable is not null
 
 ```php
 {% if foo is not null and foo is not empty %}
 {% if foo|length %}
 ```
 
-### 1.6.2. Render Node elements and fields
+### Render Node elements and fields
 
 ```php
 
@@ -322,7 +322,7 @@ $variables['base_path'] = base_path();
 {{ node.field_name[key].alt }}
 ```
 
-### 1.6.3. Render Referenced Media Elements from a referenced Item
+### Render Referenced Media Elements from a referenced Item
 
 ```php
 {# Media element = Image #}
@@ -335,7 +335,7 @@ $variables['base_path'] = base_path();
 {{ drupal_entity('media', node.FIELD_NAME.entity.MEDIA_FIELD_NAME.entity.id) }}
 ```
 
-### 1.6.4. Render multiple field elements
+### Render multiple field elements
 
 ```php
 // Loop through multiple items in a field, for example tags
@@ -353,7 +353,7 @@ $variables['base_path'] = base_path();
 {% endfor %}
 ```
 
-### 1.6.5. Render multiple taxonomy terms field
+### Render multiple taxonomy terms field
 
 ```php
 // Native
@@ -369,13 +369,13 @@ $variables['base_path'] = base_path();
 {% if tid %} {{ drupal_field('name', 'taxonomy_term', tid) }} {% endif %}
 ```
 
-### 1.6.6. Render/Access List (Text) Field type
+### Render/Access List (Text) Field type
 
 ```php
 {{node.field_name[0].value}}
 ```
 
-### 1.6.7. Render Translated content types/Taxonomies
+### Render Translated content types/Taxonomies
 
 ```php
 // Theme file
@@ -394,7 +394,7 @@ variables['language'] = $language;
 
 ```
 
-### 1.6.8. Render the label of a select field type
+### Render the label of a select field type
 
 ```php
 {% for key, item in NODE.CONTENT_TYPE.entity.FIELD_NAME if key|first != '#' %}
@@ -403,14 +403,14 @@ variables['language'] = $language;
 {% endfor %}
 ```
 
-### 1.6.9. Links
+### Links
 
 - [Rendereable Elements Attributes](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21Element%21RenderElement.php/class/RenderElement/9.1.x)
 - [Render API](https://api.drupal.org/api/drupal/core%21lib%21Drupal%21Core%21Render%21theme.api.php/group/theme_render/9.1.x)
 
-## 1.7. Urls
+## Urls
 
-### 1.7.1. Get current url
+### Get current url
 
 ```php
 
@@ -435,37 +435,37 @@ use Drupal\Core\Url;
 $url = Url::fromRoute(\Drupal::routeMatch()->getRouteName(), \Drupal::routeMatch()->getRawParameters()->all());
 ```
 
-### 1.7.2. Get current path
+### Get current path
 
 ```php
 $current_path = \Drupal::service('path.current')->getPath();
 ```
 
-### 1.7.3. Get current path alias
+### Get current path alias
 
 ```php
 $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 ```
 
-### 1.7.4. Check current path
+### Check current path
 
 ```php
  \Drupal::service('path.matcher')->isFrontPage();
 ```
 
-### 1.7.5. Get current domain
+### Get current domain
 
 ```php
 \Drupal::request()->getSchemeAndHttpHost()
 ```
 
-### 1.7.6. Get BaseUrl
+### Get BaseUrl
 
 ```php
 \Drupal::request()->baseUrl()
 ```
 
-### 1.7.7. Pass Parameters to another Route
+### Pass Parameters to another Route
 
 ```php
 
@@ -478,7 +478,7 @@ $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_pa
 $form_state->setRedirectUrl($url);
 ```
 
-### 1.7.8. Get query parameters from current URL
+### Get query parameters from current URL
 
 ```php
 
@@ -489,9 +489,9 @@ $keyword = \Drupal::request()->query->get('QUERY_PARAMETER');
 $keyword = $_GET["QUERY_PARAMETER"] ?? "";
 ```
 
-## 1.8. Libraries
+## Libraries
 
-### 1.8.1. Attach library to specific page
+### Attach library to specific page
 
 ```php
 function THEMENAME_preprocess_page(&$variables){
@@ -502,7 +502,7 @@ function THEMENAME_preprocess_page(&$variables){
 }
 ```
 
-### 1.8.2. Attach library to specific form
+### Attach library to specific form
 
 ```php
 function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
@@ -514,15 +514,15 @@ function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
 }
 ```
 
-### 1.8.3. Attach library from twig file
+### Attach library from twig file
 
 ```php
 {{ attach_library('library/name') }}
 ```
 
-## 1.9. Stored Procedures
+## Stored Procedures
 
-### 1.9.1. Execute a Stored Procedure
+### Execute a Stored Procedure
 
 ```php
 
@@ -531,7 +531,7 @@ $results = Database::getConnection()->query("EXEC SCHEMA.SP_SP_NAME", $options)-
 
 ```
 
-### 1.9.2. Execute a Stored Procedure and get data as a return
+### Execute a Stored Procedure and get data as a return
 
 1. The PHP File we're working with
 
@@ -563,9 +563,9 @@ $results = Database::getConnection()->query("EXEC SCHEMA.SP_SP_NAME", $options)-
 
 ```
 
-## 1.10. SQL
+## SQL
 
-### 1.10.1. Grouping query conditions + Using SQL LIKE operator
+### Grouping query conditions + Using SQL LIKE operator
 
 ```php
 
@@ -585,9 +585,9 @@ $results = $pager->execute()->fetchAll();
 Database::setActiveConnection();
 ```
 
-### 1.10.2. Query Pagination
+### Query Pagination
 
-#### 1.10.2.1. Using PagerSelectExtender
+#### Using PagerSelectExtender
 
 ```php
 
@@ -610,7 +610,7 @@ $results = $pager->execute()->fetchAll();
 Database::setActiveConnection();
 ```
 
-#### 1.10.2.2. Using Stored Procedure + PHP
+#### Using Stored Procedure + PHP
 
 ```php
 // Execute the Sp to get the count result
@@ -737,9 +737,9 @@ $rest = preg_replace($pattern, $replacement, $current_url);
    ?>
 ```
 
-## 1.11. Forms
+## Forms
 
-### 1.11.1. Create a form with Ajax Callback - namespace + buildForm()
+### Create a form with Ajax Callback - namespace + buildForm()
 
 ```php
 /**
@@ -867,7 +867,7 @@ return $form;
   }
 ```
 
-### 1.11.2. Create a form with Ajax Callback - submitForm()
+### Create a form with Ajax Callback - submitForm()
 
 ```php
 // Create the required submitForm() function
@@ -924,7 +924,7 @@ public function myAjaxCallback(array &$form, FormStateInterface $form_state)
 }
 ```
 
-### 1.11.3. Create a form with Ajax Callback - validateForm()
+### Create a form with Ajax Callback - validateForm()
 
 ```php
 // Create the OPTIONAL validateForm() function
@@ -942,7 +942,7 @@ public function validateForm(array &$form, FormStateInterface $form_state)
 }
 ```
 
-### 1.11.4. Button with other function
+### Button with other function
 
 ```php
  $form['actions']['BUTTONNAME'] = [
@@ -952,7 +952,7 @@ public function validateForm(array &$form, FormStateInterface $form_state)
 ];
 ```
 
-### 1.11.5. Form elements
+### Form elements
 
 ```php
 
@@ -970,7 +970,7 @@ $form['name'] =
     ];
 ```
 
-### 1.11.6. Add classes to form
+### Add classes to form
 
 ```php
 
@@ -978,7 +978,7 @@ $form['name'] =
 $form['#attributes']['class'][] = 'form-inline';
 ```
 
-### 1.11.7. Add class to form element Label
+### Add class to form element Label
 
 ```php
 // Method 1
@@ -993,7 +993,7 @@ $form['name'] =
 );
 ```
 
-### 1.11.8. Disable advanced search and help links from search form
+### Disable advanced search and help links from search form
 
 ```php
   if ($form_id == 'search_form') {
@@ -1011,7 +1011,7 @@ $form['name'] =
   }
 ```
 
-### 1.11.9. Get the element name instead of value
+### Get the element name instead of value
 
 ```php
 if (!empty($form_state->getValue('name'))) {
@@ -1024,9 +1024,9 @@ $FIELD_NAME = $form['FIELD_NAME']['#options'][$value]; //This
  }
 ```
 
-## 1.12. Files & Images
+## Files & Images
 
-### 1.12.1. Create CSV
+### Create CSV
 
 ```php
 public function FUNCTION_NAME(array &$form, FormStateInterface $form_state)
@@ -1087,7 +1087,7 @@ public function FUNCTION_NAME(array &$form, FormStateInterface $form_state)
 }
 ```
 
-### 1.12.2. Create the url of an image
+### Create the url of an image
 
 ```php
 use Drupal\file\Entity\File;
@@ -1101,7 +1101,7 @@ if (!empty($mid)) {
 }
 ```
 
-## 1.13. Messages
+## Messages
 
 1. Create a link as a message
 
@@ -1111,7 +1111,7 @@ if (!empty($mid)) {
    \Drupal::messenger()->addStatus(['#markup' => '<a href=' . $enlace_convocatoria_nueva . ' target="_blank" rel= noopener noreferrer" >OPEN LINK</a>']);
 ```
 
-## 1.14. Add Metatags
+## Add Metatags
 
 ```php
 function MODULE_NAME_page_attachments_alter(array &$page)
@@ -1193,7 +1193,7 @@ function MODULE_NAME_page_attachments_alter(array &$page)
   }
 ```
 
-## 1.15. Create Next/Previous Post links
+## Create Next/Previous Post links
 
 ```php
 
@@ -1270,9 +1270,9 @@ if ($node instanceof \Drupal\node\NodeInterface) {
 {% endif %}
 ```
 
-## 1.16. Other useful functions
+## Other useful functions
 
-### 1.16.1. Create Permalink without accents
+### Create Permalink without accents
 
 ```php
 /**
@@ -1292,7 +1292,7 @@ function createSlug($str, $delimiter = '-')
 }
 ```
 
-### 1.16.2. Check if string Starts With
+### Check if string Starts With
 
 ```php
 // Function to check string starting
@@ -1311,7 +1311,7 @@ if (!startsWith($palabra_clave_sp, "'") && strlen(trim($palabra_clave_sp)) !== 0
 ```
 
 
-### 1.16.3. Group Array by Date
+### Group Array by Date
 
 ```php
 private function groupByDate( $array ) {
@@ -1324,7 +1324,7 @@ private function groupByDate( $array ) {
   }
 ```
 
-### 1.16.4. Flatten Array
+### Flatten Array
 
 ```php
 private function array_flatten( $array = null, $depth = 1 ) {
@@ -1344,15 +1344,15 @@ private function array_flatten( $array = null, $depth = 1 ) {
 }
 ```
 
-## 1.17. Drush
+## Drush
 
-### 1.17.1. Instalation
+### Instalation
 
 ```shell
 composer require drush/drush:10.6.2
 ```
 
-### 1.17.2. Drush Commands i use most
+### Drush Commands i use most
 
 ```shell
 # Cache clear
