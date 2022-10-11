@@ -11,7 +11,7 @@
 - [Heshans Blog](https://www.heididev.com/)
 - [Drupal tips](https://codimth.com/)
 
-## Modules ##
+## Modules
 
 ### Administration
 
@@ -21,7 +21,7 @@
 
 - Rabbit Hole
 
-### Development ###
+### Development
 
 - Devel
 - Twig Tweak
@@ -29,7 +29,7 @@
 - Twig Vardumper
 - Simple Cron
 
-### Productivity ###
+### Productivity
 
 
 - Bulk update fields _(optional)_
@@ -48,23 +48,23 @@
 
 - Better Exposed Filters
 
-### Themes ###
-
-- AT Theme 2.0 + AT Theme generator + AT Tool
-- Bootstrap Sass
-
-### Search ###
+### Search
 
 - Search Api
 - Search Api Solr
 - Facets
 
-## Configuration
+### Configuration
 
 - Config Filter
 - Config ignore
 
-## Core Classes & Methods
+## Themes
+
+- AT Theme 2.0 + AT Theme generator + AT Tool
+- Bootstrap Barrio / Bootstrap Sass
+
+## Using Core Classes & Methods
 
 ### Url
 
@@ -154,13 +154,13 @@ $keyword = \Drupal::request()->query->get('QUERY_PARAMETER');
 $keyword = $_GET["QUERY_PARAMETER"] ?? "";
 ```
 
-## Best Practices
 
 
+## Entities
 
-## Nodes
+### Nodes
 
-### Get Current Node information
+#### Get Current Node information
 
 ```php
 // Using a preprocessing function we can access information on the current node
@@ -172,20 +172,20 @@ $title = $node->getTitle();; // Node title
 $node->bundle(); // Node Type same as getType()
 ```
 
-### Get current Node information on preview page
+#### Get current Node information on preview page
 
 ```php
   $routeMatch   = \Drupal::routeMatch();
   $node_preview = $routeMatch->getParameter( 'node_preview' );
-```z
+```
 
-### 1.4.3. Get info of a specific Node - NODE::load()
+#### Get info of a specific Node - NODE::load()
 
 ```php
 $NODE_TITLE =  Node::load(ID)->getTitle(); // Node title
 ```
 
-### Get info of a specific Nodes - EntityQuery
+#### Get info of a specific Nodes - EntityQuery
 
 ```php
 $node_ids = Drupal::entityQuery('node')
@@ -195,7 +195,7 @@ $node_ids = Drupal::entityQuery('node')
 $nodes = Node::loadMultiple($node_ids); // All the nodes in an assoc array
 ```
 
-### Get info of a specific Nodes - EntityTypeManager
+#### Get info of a specific Nodes - EntityTypeManager
 
 ```php
 $query = \Drupal::entityTypeManager()->getStorage('node');
@@ -222,9 +222,9 @@ $enlace = \Drupal::service('path_alias.manager')
 
 [Node Methods](https://api.drupal.org/api/drupal/core%21modules%21node%21src%21Entity%21Node.php/class/Node/9.1.x)
 
-### Get Taxonomy Term Names
+#### Get Taxonomy Term Names
 
-#### Method 1 - entityTypeManager - Gets Taxonomy Terms
+##### Method 1 - entityTypeManager - Gets Taxonomy Terms
 
 ```php
 $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree(
@@ -240,7 +240,7 @@ foreach ($tree as $term) {
 }
 ```
 
-#### Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
+##### Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
 
 ```php
 $taxonomy_terms = \Drupal::entityQuery('taxonomy_term')
@@ -257,7 +257,7 @@ $term_names_array = [];
 }
 ```
 
-#### Method 3 - Same as method 3 but using entityTypeManager
+##### Method 3 - Same as method 3 but using entityTypeManager
 
 ```php
 
