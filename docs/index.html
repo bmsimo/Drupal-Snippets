@@ -54,13 +54,20 @@
     <div id="app"></div>
     <script>
       window.$docsify = {
-        // loadSidebar: true,
-        // subMaxLevel: 2
+        share: { linkedin: true, twitter: true },
+        color: "#5900ff",
+        copyCode: {
+          buttonText: "Copy to clipboard",
+          errorText: "Error",
+          successText: "Copied",
+        },
       };
     </script>
     <!-- Docsify v4 -->
     <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
     <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-php.min.js"></script>
+    <script src="//unpkg.com/docsify-share/build/index.min.js"></script>
+    <script src="https://unpkg.com/docsify-copy-code@2"></script>
   </body>
 </html>
