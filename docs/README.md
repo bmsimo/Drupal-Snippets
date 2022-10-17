@@ -64,41 +64,22 @@
 - AT Theme 2.0 + AT Theme generator + AT Tool
 - Bootstrap Barrio / Bootstrap Sass
 
-## Using Core Classes & Methods
+## Drupal Core Classes & Methods
 
-### Url
+### Url - Drupal\Core\Url
 
-#### Get current url
+#### Get current Url
 
 ```php
-
-// Method 1
-$url = Url::fromRoute('<current>');
-$url = \Drupal\Core\Url::fromRoute('<current>');
-$path = $url->getInternalPath();
-
-// Method 2
-Url::fromRoute('<current>',array(),array('absolute'=>'true'))->toString();
-
-// Method 3
-use Drupal\Core\Url;
-Url::fromRoute('<current>', [], ['query' => \Drupal::request()->query->all(), 'absolute' => 'true'])->toString();
-
-// Method 4
-$current_route = \Drupal::routeMatch()->getRouteName();
-$current_parameters = \Drupal::routeMatch()->getParameters();
-
-// Method 5
-use Drupal\Core\Url;
-$url = Url::fromRoute(\Drupal::routeMatch()->getRouteName(), \Drupal::routeMatch()->getRawParameters()->all());
+$url = Url::fromRoute('<current>'); //Route Object, if no options were added we get a relative URL
+$url = Url::fromRoute('<current>',['absolute'=> 'true']); //Route Object, 'Absolute' parameter was passed, we get a an absolute url
+$url = $url->toString(); // String url
 ```
-
-
 
 #### Pass Parameters to another Route
 
-```php
 
+```php
 // On form submit, do this
  $url = Url::fromRoute('ROUTE')->setRouteParameters([
     'name' => $name,
@@ -110,51 +91,61 @@ $form_state->setRedirectUrl($url);
 
 ### Drupal
 
-#### Get current path
+#### Drupal::Service
+
+##### Get current path
 
 ```php
 $current_path = \Drupal::service('path.current')->getPath();
 ```
 
-#### Get current path alias
+##### Get current path alias
 
 ```php
 $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 ```
 
-#### Check current path
+##### Check if current path is frontpage
 
 ```php
  \Drupal::service('path.matcher')->isFrontPage();
 ```
 
-### Request
+#### Drupal::routeMatch
 
-#### Get current domain
+##### Get current Route
+
+```php
+$current_route = \Drupal::routeMatch()->getRouteName();
+$current_parameters = \Drupal::routeMatch()->getParameters();
+```
+
+
+#### Drupal::Request
+
+##### Get current domain
 
 ```php
 \Drupal::request()->getSchemeAndHttpHost()
 ```
 
-#### Get BaseUrl
+##### Get BaseUrl
 
 ```php
 \Drupal::request()->baseUrl()
 ```
 
-
-#### Get query parameters from current URL
+##### Get a specific query parameters from current URL
 
 ```php
-
-// Recommended
 $keyword = \Drupal::request()->query->get('QUERY_PARAMETER');
-
-// Using $_GET[]
-$keyword = $_GET["QUERY_PARAMETER"] ?? "";
 ```
 
+##### Get all query parameters
 
+```php
+$keyword = \Drupal::request()->query->all();
+```
 
 ## Entities
 
@@ -163,13 +154,15 @@ $keyword = $_GET["QUERY_PARAMETER"] ?? "";
 #### Get Current Node information
 
 ```php
-// Using a preprocessing function we can access information on the current node
 $node = \Drupal::routeMatch()->getParameter('node'); // get node
-if ($node instanceof \Drupal\node\NodeInterface){} // Check if it's node
-$CONTENT_TYPE = $node->getType(); // Node type
-$nid = $node->id(); // Node id | nid
-$title = $node->getTitle();; // Node title
-$node->bundle(); // Node Type same as getType()
+
+$node_type = $node->getType(); // Node type
+$node_bundle = $node->bundle(); // Node type
+
+$nid = $node->id(); // Node id
+
+$title = $node->getTitle(); // Node title
+
 ```
 
 #### Get current Node information on preview page
@@ -198,23 +191,22 @@ $nodes = Node::loadMultiple($node_ids); // All the nodes in an assoc array
 #### Get info of a specific Nodes - EntityTypeManager
 
 ```php
-$query = \Drupal::entityTypeManager()->getStorage('node');
-$query_result = $query->getQuery();
-
-$nodo = $query_result->condition('nid', $nid, '=')
+$node = \Drupal::entityTypeManager()->getStorage('node')
+        ->getQuery()
+        ->condition('nid', $nid, '=')
         ->condition('type', 'blog')
         ->condition('status', 1)
         ->sort('nid', 'ASC')
         ->range(0, 1)
         ->execute();
 
-$nodo = array_values($nodo);
-$nodo = $nodo[0];
+$node = array_values($node);
+$node = $node[0];
 
-$titulo =  Node::load($nodo)->getTitle(); // Titulo
+$titulo =  Node::load($node)->getTitle(); // Titulo
 
-$enlace = \Drupal::service('path_alias.manager')
-          ->getAliasByPath('/node/' . $nodo);  // Relative url
+$link = \Drupal::service('path_alias.manager')
+          ->getAliasByPath('/node/' . $node);  // Relative url
 
 ```
 
@@ -243,18 +235,15 @@ foreach ($tree as $term) {
 ##### Method 2 - EntityQuery + load - Get Taxonomy Terms sorted by custom field
 
 ```php
-$taxonomy_terms = \Drupal::entityQuery('taxonomy_term')
+$results = \Drupal::entityQuery('taxonomy_term')
     ->condition('vid', "TAXONOMY_TERM")
-    ->sort('FIELD');
+    ->sort('FIELD')
+    ->execute();
 
-$results = $taxonomy_terms->execute();
-
-$term_names_array = [];
-
+  $term_names_array = [];
 
   $term = \Drupal\taxonomy\Entity\Term::load($result);
-  $term_names_array[] = $term->name->value;
-}
+  $term_names_array[] = $term->getName();
 ```
 
 ##### Method 3 - Same as method 3 but using entityTypeManager
@@ -279,7 +268,7 @@ foreach ($results as $result) {
 
 ## Templates
 
-### Use specific Template
+### Create template suggestions
 
 ```php
 function THEMENAME_theme_suggestions_page_alter(array &$suggestions, array $variables){
@@ -294,13 +283,6 @@ $current_path = \Drupal::service('path.current')->getPath();
 $path_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
 $path_alias = ltrim($path_alias, '/');
 $variables['attributes']['class'][] = 'path-' . \Drupal\Component\Utility\Html::cleanCssIdentifier($path_alias);
-```
-
-### Get all parameters
-
-```php
-$parameters = \Drupal::routeMatch()->getParameters()->all();
-$parameters['taxonomy_term'];
 ```
 
 ### Get current language
@@ -331,7 +313,7 @@ $variables['base_path'] = base_path();
 ```php
 
 {# Node Title #}
-{{node.title.value}}
+{{node.getTitle()}}
 
 {# Image Field #}
 {{ file_url(node.field_name.entity.fileuri) }} // Url
@@ -467,48 +449,6 @@ function MODULE_NAME_form_alter(&$form, &$form_state, $form_id)
 {{ attach_library('library/name') }}
 ```
 
-## Stored Procedures
-
-### Execute a Stored Procedure
-
-```php
-
-// Executing the query --> RETURNS A BOOLEAN
-$results = Database::getConnection()->query("EXEC SCHEMA.SP_SP_NAME", $options)->execute();
-
-```
-
-### Execute a Stored Procedure and get data as a return
-
-1. The PHP File we're working with
-
-```php
-
-  // We don't use execute(), we directly run fetchAssoc() to get an associative array or fetchObject() to get a an object
-  $sp = Database::getConnection()->query("EXECUTE DRU.SP_NAME", $options)->fetchAssoc();
-
-  // OR
-  // $sp = Database::getConnection()->query("EXECUTE DRU.SP_NAME", $options)->fetchObject();
-
-  return [
-    '#sp' => $sp,
-  ]
-```
-
-2. we get the data from the return and pass it onto the twig file
-
-```php
-
-<!-- Since it's an associative array, we need the key and value -->
-
-{% for key,value in sp %}
-    Key :
-    {{ key }}
-    Value :
-    {{ value }}
-{% endfor %}
-
-```
 
 ## SQL
 
@@ -682,6 +622,49 @@ $rest = preg_replace($pattern, $replacement, $current_url);
    <?php endif; // !page
    endif; // current page < total pages
    ?>
+```
+
+## Stored Procedures
+
+### Execute a Stored Procedure
+
+```php
+
+// Executing the query --> RETURNS A BOOLEAN
+$results = Database::getConnection()->query("EXEC SCHEMA.SP_SP_NAME", $options)->execute();
+
+```
+
+### Execute a Stored Procedure and get data as a return
+
+1. The PHP File we're working with
+
+```php
+
+  // We don't use execute(), we directly run fetchAssoc() to get an associative array or fetchObject() to get a an object
+  $sp = Database::getConnection()->query("EXECUTE DRU.SP_NAME", $options)->fetchAssoc();
+
+  // OR
+  // $sp = Database::getConnection()->query("EXECUTE DRU.SP_NAME", $options)->fetchObject();
+
+  return [
+    '#sp' => $sp,
+  ]
+```
+
+2. we get the data from the return and pass it onto the twig file
+
+```php
+
+<!-- Since it's an associative array, we need the key and value -->
+
+{% for key,value in sp %}
+    Key :
+    {{ key }}
+    Value :
+    {{ value }}
+{% endfor %}
+
 ```
 
 ## Forms
@@ -1048,10 +1031,11 @@ if (!empty($mid)) {
 }
 ```
 
-## Messages
+## Messages (Drupal::messenger)
+
+> Drupal::messenger() helps us show messages on the page 
 
 1. Create a link as a message
-
 ```php
    \Drupal::messenger()->addError('');
    \Drupal::messenger()->addWarning('');
