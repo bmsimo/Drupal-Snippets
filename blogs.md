@@ -13,3 +13,4 @@
 - https://www.valuebound.com/tag/drupal
 - https://www.axelerant.com/blog/drupal-website-optimization#H2677
 - https://menetray.com/en/blog
+- https://drupaljournal.com/
