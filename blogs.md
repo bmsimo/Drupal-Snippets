@@ -1,7 +1,8 @@
 # Interesting Blogs
 
 - https://www.webwash.net/category/drupal/
-- https://www.webwash.net/category/drupal/https://ixis.co.uk/blog- 
+- https://www.webwash.net/category/drupal/
+- https://ixis.co.uk/blog
 - https://gorannikolovski.com/blog
 - https://drupalsun.com/
 - https://stefvanlooveren.me/tags/drupal
@@ -14,3 +15,4 @@
 - https://www.axelerant.com/blog/drupal-website-optimization#H2677
 - https://menetray.com/en/blog
 - https://drupaljournal.com/
+- https://mglaman.dev/
